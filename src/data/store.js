@@ -9,6 +9,6 @@ export const store = reactive({
   //tv film popolari con la mia chiave
   apiUrl: 'https://api.themoviedb.org/3/tv/popular?api_key=62ddb60fd9eb8727b99a8b8bf24bd8b2&language=en-US&page=1',
 
-
+  popularFilmsArray: [],
 
 })

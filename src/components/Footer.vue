@@ -21,7 +21,7 @@ export default {
 
 
 footer{
-  background-color: $primary-color;
+  background-color: #0a0a0a;
   
 }
 
