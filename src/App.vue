@@ -15,7 +15,26 @@ export default {
     return{
       store
     }
+  },
+  methods:{
+    getApi(){
+      console.log('getAPI test');
+      axios.get(store.apiUrl)
+      .then(result => {
+        console.log(result.data);
+
+
+      })
+      .catch(error => {
+        console.log(error);
+      })
+
+    }
+  },
+  mounted(){
+    this.getApi();
   }
+
 }
 </script>
 

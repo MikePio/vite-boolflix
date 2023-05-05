@@ -32,7 +32,9 @@ export default {
 @use '../scss/main.scss' as *;
 
 header{
-  background-color: $primary-color;
+  background-color:  rgb(20, 20, 20);
+
+
 
   height: 100px;
     
