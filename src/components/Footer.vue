@@ -12,11 +12,18 @@ export default {
 
 <template>
   <footer>
-    <h1>test</h1>
+
   </footer>
 </template>
 
 <style lang="scss" scoped>
 @use '../scss/main.scss' as *;
+
+
+footer{
+
+  
+}
+
 
 </style>

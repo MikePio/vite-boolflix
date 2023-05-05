@@ -28,4 +28,5 @@ export default {
 <style lang='scss'>
 @use './scss/main.scss' as *;
 
+
 </style>

@@ -1,4 +1,4 @@
-Vite Boolflix
+Vite BoolFlix
 ===
 ## Descrizione
 
