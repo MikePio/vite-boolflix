@@ -28,12 +28,22 @@ export default {
         </div> -->
 
         <!-- cards dinamiche-->
-        <div v-for="(card, index) in store.popularFilmsArray" :key="index" class="mp-card">
-          <!-- <img class="card-img-top" :src="card.backdrop_path" alt="img"> -->
+        <!-- <div v-for="(card, index) in store.popularFilmsArray" :key="index" class="mp-card">
           <img class="card-img-top" :src="`https://image.tmdb.org/t/p/w500${card.poster_path}`" alt="img">
-
           <div class="card-body">
             <h5 class="card-title text-center p-3">{{card.name}}</h5>
+          </div>
+        </div> -->
+
+        <!-- cards dinamiche-->
+        <div v-for="(card, index) in store.popularFilmsArray" :key="index" class="mp-card">
+          <div>
+          <img v-if="card.poster_path || card.backdrop_path != null" class="card-img-top" :src="`https://image.tmdb.org/t/p/w500${card.poster_path || card.backdrop_path}`" alt="img">
+          <img v-else class="card-img-top" src="public\img\logo-boolflix.png" alt="img">
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title d-flex align-items-center justify-content-center text-center p-3">{{card.title || card.name}}</h5>
           </div>
         </div>
 
@@ -74,7 +84,7 @@ main{
       // height: 125px;
       .card-title{
         color: white;
-        height: 80px;
+        height: 125px;
       }
     }
   }

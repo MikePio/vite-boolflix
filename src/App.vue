@@ -17,9 +17,54 @@ export default {
     }
   },
   methods:{
+
+    getApiStart(){
+      console.log('getAPIStart');
+      axios.get(store.apiUrlStart)
+      .then(result => {
+        store.popularFilmsArray = result.data.results;
+        console.log('store.popularFilmsArray', store.popularFilmsArray);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    },
+
+    getApiSearch(){
+      let customParams = {
+        params: {
+          api_key: store.apiKey,
+          language: store.languageShows, 
+          query: store.titleShows,
+          // title: store.titleShows,
+          page: store.pageShows
+
+        }
+      }
+      // axios.get(store.apiUrl, store.apiKey, customParams)
+      axios.get(store.apiUrl, customParams)
+      .then(result => {
+        store.popularFilmsArray = result.data.results;
+        console.log('store.popularFilmsArray', store.popularFilmsArray);
+
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    },
+
     getApi(){
-      console.log('getAPI test');
-      axios.get(store.apiUrl)
+      console.log('getAPI search');
+      let customParams = {
+        params: {
+          title: store.titleShows,
+          original_title: store.originalTitleShows,
+          original_language: store.languageShows, 
+          vote_average: store.voteShows
+
+        }
+      }
+      axios.get(store.apiUrl, store.apiKey, customParams)
       .then(result => {
         // console.log(result.data);
         // store.popularFilmsArray.push(result.data);
@@ -50,7 +95,19 @@ export default {
 
         //* prendo tutti gli elementi di tutti i film
         store.popularFilmsArray = result.data.results;
-        console.log(store.popularFilmsArray);
+        console.log('store.popularFilmsArray', store.popularFilmsArray);
+
+        // if(store.titleShows.includes(title)){
+        //   console.log('1');
+        // }else if(title.includes(store.titleShows)){
+        //   console.log('2');
+        // }else{
+        //   console.log('error');
+        // }
+
+
+
+        console.log(store.apiUrl, store.apiKey, customParams);
 
       })
       .catch(error => {
@@ -60,14 +117,14 @@ export default {
     }
   },
   mounted(){
-    this.getApi();
+    this.getApiStart();
   }
 
 }
 </script>
 
 <template>
-  <Header/>
+  <Header @searchShows="getApiSearch" />
   <Main/>
   <Footer/>
 </template>
