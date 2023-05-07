@@ -17,7 +17,7 @@ export default {
       <div class="container d-flex align-items-center justify-content-end">
         <!-- input di ricerca in base al titolo -->
         <div class="input-group input-group-sm mx-3">
-          <input @keyup.enter="$emit('searchShows')" v-model="store.titleShows" type="text" class="w-25 form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Cerca un film">
+          <input @keyup.enter="$emit('searchShows')" v-model="store.titleShows" type="text" class="w-25 form-control search-bar" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Cerca un film">
         </div>
         <!-- select di ricerca in base a film e serie tv -->
         <select class="form-select form-select-sm" aria-label=".form-select-sm example">
@@ -26,12 +26,18 @@ export default {
           <option>Serie TV</option>
         </select>
 
-<!-- CREA UNA SELECT CHE CONTIENE DELLE BANDIERE IN MODO DA POTER CAMBIARE LA LINGUA -->
+<!-- todo: CREA UNA SELECT CHE CONTIENE DELLE BANDIERE IN MODO DA POTER CAMBIARE LA LINGUA -->
+
+<!-- creata una funzione che al change della select con 2 condizioni if (value == "") se la input bar è vuota changeLanguage cioè getApiSTart e else searchShows cioè getApiSearch -->
         <!-- select di ricerca in base a film e serie tv -->
-        <!-- <select v-model="languageShows" class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option  value="en-US" selected>English</option>
-          <option value="it" >Ita</option>
-        </select> -->
+        <select @change="$emit('changeLanguage')" v-model="store.languageShows" class="select-languages form-select form-select-sm mx-3" aria-label=".form-select-sm example">
+          <option value="null" selected>English</option>
+          <option value="it" >Italiano</option>
+          <option value="de" >Deutsch</option>
+          <option value="es" >Español</option>
+          <option value="fr" >Français</option>
+
+        </select>
 
 
       </div>

@@ -19,8 +19,21 @@ export default {
   methods:{
 
     getApiStart(){
+
+      let customParams = {
+        params: {
+          // api_key: store.apiKey,
+          language: store.languageShows, 
+          // query: store.titleShows,
+          // title: store.titleShows,
+          // page: store.pageShows
+        }
+      }
+
+
       console.log('getAPIStart');
-      axios.get(store.apiUrlStart)
+      axios.get(store.apiUrlStart, customParams)
+      // axios.get(store.apiUrlStart)
       .then(result => {
         store.popularFilmsArray = result.data.results;
         console.log('store.popularFilmsArray', store.popularFilmsArray);
@@ -114,7 +127,27 @@ export default {
         console.log(error);
       })
 
+    },
+
+    //controllo se l'input è vuoto oppure se c'è scritto qualcosa all'interno
+    checkInput(){
+      const searchBar = document.querySelector('.search-bar');
+        console.log(searchBar);
+        if(searchBar.value == null || searchBar.value == "" || searchBar.value == "null" ){
+        this.getApiStart();
+        console.log('getApiStart');
+        console.log(searchBar.value);
+      }else{
+        this.getApiSearch();
+        console.log('getApiSearch');
+        console.log(searchBar.value);
+      }
+
     }
+
+
+
+
   },
   mounted(){
     this.getApiStart();
@@ -124,7 +157,7 @@ export default {
 </script>
 
 <template>
-  <Header @searchShows="getApiSearch" />
+  <Header @searchShows="getApiSearch" @changeLanguage="checkInput" />
   <Main/>
   <Footer/>
 </template>
