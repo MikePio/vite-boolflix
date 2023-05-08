@@ -19,25 +19,36 @@ export default {
         <div class="input-group input-group-sm mx-3">
           <input @keyup.enter="$emit('searchShows')" v-model="store.titleShows" type="text" class="w-25 form-control search-bar" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Cerca un film">
         </div>
+
         <!-- select di ricerca in base a film e serie tv -->
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option value="null" selected>All</option>
-          <option>Film</option>
-          <option>Serie TV</option>
+        <!-- <select @change="$emit('changeType')" v-model="store.apiUrl" id="select-types-id" class="select-types form-select form-select-sm mx-1" aria-label=".form-select-sm example"> -->
+        <!--//! NON UTILIZZARE IL v-model perchè in questo modo il VALORE delle options NON VIENE SALVATO -->
+        <select @change="$emit('changeType')" id="select-types-id" class="select-types form-select form-select-sm mx-1" aria-label=".form-select-sm example">
+          <!-- <option value="null" selected>All</option> -->
+          <option value="null">All</option>
+          <!-- <option value="movie" selected>Film</option> -->
+          <!-- <option value="tv" selected>Serie TV</option> -->
+          <option value="movie">Film</option>
+          <option value="tv">Serie TV</option>
         </select>
 
 <!-- todo: CREA UNA SELECT CHE CONTIENE DELLE BANDIERE IN MODO DA POTER CAMBIARE LA LINGUA -->
 
 <!-- creata una funzione che al change della select con 2 condizioni if (value == "") se la input bar è vuota changeLanguage cioè getApiSTart e else searchShows cioè getApiSearch -->
         <!-- select di ricerca in base a film e serie tv -->
+        <!--//todo NON UTILIZZARE IL v-model perchè in questo modo il VALORE delle options NON VIENE SALVATO -->
         <select @change="$emit('changeLanguage')" v-model="store.languageShows" class="select-languages form-select form-select-sm mx-3" aria-label=".form-select-sm example">
-          <option value="null" selected>English</option>
-          <option value="it" >Italiano</option>
-          <option value="de" >Deutsch</option>
-          <option value="es" >Español</option>
-          <option value="fr" >Français</option>
-
+        <!--//todo QUINDI FAI IN MODO CHE QUESTO FUNZIONI -->
+        <!-- <select @change="$emit('changeLanguage')" class="select-languages form-select form-select-sm mx-3" aria-label=".form-select-sm example"> -->
+          <option value="null" selected>English <span>&#x1F1FA;&#x1F1F8; 🇬🇧 </span></option>
+          <option value="it" >Italiano 🇮🇹 </option>
+          <option value="de" >Deutsch 🇩🇪 </option>
+          <option value="es" >Español 🇪🇸 </option>
+          <option value="fr" >Français 🇫🇷 </option>
         </select>
+
+
+
 
 
       </div>

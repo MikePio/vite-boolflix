@@ -19,10 +19,25 @@ export default {
   methods:{
 
     getApiStart(){
+      //* crea delle condizioni if che controllano se la select di type ha un valore uguale a tv allora store.apiUrlStart="https://api.themoviedb.org/3/tv/popular"
+      //* else if invece se la select di type ha un valore uguale a movie allora store.apiUrlStart="https://api.themoviedb.org/3/movie/popular"
+      //* else allora store.apiUrlStart="https://api.themoviedb.org/3/trending/all/day"
+      //! OPPURE else if invece se la select di type ha un valore uguale a null allora store.apiUrlStart="https://api.themoviedb.org/3/trending/all/day"
+      const selectTypes = document.querySelector('.select-types');
+      if (selectTypes.value == 'tv') {
+        store.apiUrlStart = 'https://api.themoviedb.org/3/tv/popular';
+        console.log('tv', selectTypes.value);
+      } else if (selectTypes.value == 'movie') {
+        store.apiUrlStart = 'https://api.themoviedb.org/3/movie/popular';
+        console.log('movie', selectTypes.value);
+      } else if (selectTypes.value == null || selectTypes.value == "" || selectTypes.value == "null") {
+        store.apiUrlStart = 'https://api.themoviedb.org/3/trending/all/day';
+        console.log('null', selectTypes.value);
+      }
 
       let customParams = {
         params: {
-          // api_key: store.apiKey,
+          api_key: store.apiKey,
           language: store.languageShows, 
           // query: store.titleShows,
           // title: store.titleShows,
@@ -44,6 +59,19 @@ export default {
     },
 
     getApiSearch(){
+      // //!  è = a getApiSection //////////////////////////////////////////////////////////////////////////////////
+      // // todo SCRITTO 2 VOLTE QUINDI SOSTITUISCILO CON UNA FUNZIONE //////////////////////////////////////////////////////////////////////////////////
+      // const selectTypes = document.querySelector('.select-types');
+      // if (selectTypes.value == 'tv') {
+      //   store.apiUrl = 'https://api.themoviedb.org/3/search/tv';
+      //   console.log('tv', selectTypes.value);
+      // } else if (selectTypes.value == 'movie') {
+      //   store.apiUrl = 'https://api.themoviedb.org/3/search/movie';
+      //   console.log('movie', selectTypes.value);
+      // } else if (selectTypes.value == null || selectTypes.value == "" || selectTypes.value == "null") {
+      //   store.apiUrl = 'https://api.themoviedb.org/3/search/multi';
+      //   console.log('null', selectTypes.value);
+      // }
       let customParams = {
         params: {
           api_key: store.apiKey,
@@ -138,12 +166,88 @@ export default {
         console.log('getApiStart');
         console.log(searchBar.value);
       }else{
+        //!  è = a getApiSection //////////////////////////////////////////////////////////////////////////////////
+        // todo SCRITTO 2 VOLTE QUINDI SOSTITUISCILO CON UNA FUNZIONE //////////////////////////////////////////////////////////////////////////////////
+        const selectTypes = document.querySelector('.select-types');
+        // const selectTypes = document.getElementById('select-types-id');
+        if (selectTypes.value == 'tv') {
+          store.apiUrl = 'https://api.themoviedb.org/3/search/tv';
+          console.log('selectTypes = tv', selectTypes.value);
+        } else if (selectTypes.value == 'movie') {
+          store.apiUrl = 'https://api.themoviedb.org/3/search/movie';
+          console.log('selectTypes = movie', selectTypes.value);
+        } else if (selectTypes.value == null || selectTypes.value == "" || selectTypes.value == "null") {
+          store.apiUrl = 'https://api.themoviedb.org/3/search/multi';
+          console.log('selectTypes = null', selectTypes.value);
+        }
         this.getApiSearch();
         console.log('getApiSearch');
         console.log(searchBar.value);
       }
 
-    }
+    },
+
+    //!Quando si clicca sulla option della select film
+    //*CREA una chiamata API SOLO PER FILM che fa diventare display none la sezione/il componente delle SERIE TV 
+
+    //!Quando si clicca sulla option della select serie tv
+    //*CREA una chiamata API SOLO PER SERIE TV  che fa diventare display none la sezione/il componente dei FILM 
+
+    //!Quando si clicca sulla option della select ALL e COME DEFAULT
+    //*CREA UN METODO CON IF CHE SERVE PER DIVIDERE LA SEZIONE FILM DALLA SEZIONE SERIE TV 
+    //* IN MODO DA FARE UNA SOLA CHIAMATA IN CUI I FILM SONO COLORO CHE HANNO COME "media_type": "movie",
+    //* IN MODO DA FARE UNA SOLA CHIAMATA IN CUI LE SERIE TV SONO COLORO CHE HANNO COME media_type": "tv",
+    checkInputType(){
+      // TODO DA SOSTITUIRE CON LA FUNZIONE PRECEDENTE INSERENDO DEI PARAMETRI /////////////////////////////////////////////////////////////////////////////////////////////
+      const searchBar = document.querySelector('.search-bar');
+        console.log(searchBar);
+        if(searchBar.value == null || searchBar.value == "" || searchBar.value == "null" ){
+        this.getApiStart();
+        console.log('getApiStart');
+        console.log(searchBar.value);
+      }else{
+        this.getApiSection();
+        console.log('getApiSection');
+        console.log(searchBar.value);
+      }
+      
+    },
+
+    getApiSection(){
+      //!  è = a getApiSearch //////////////////////////////////////////////////////////////////////////////////
+      // todo SCRITTO 2 VOLTE QUINDI SOSTITUISCILO CON UNA FUNZIONE //////////////////////////////////////////////////////////////////////////////////
+      const selectTypes = document.querySelector('.select-types');
+      if (selectTypes.value == 'tv') {
+        store.apiUrl = 'https://api.themoviedb.org/3/search/tv';
+        console.log('tv', selectTypes.value);
+      } else if (selectTypes.value == 'movie') {
+        store.apiUrl = 'https://api.themoviedb.org/3/search/movie';
+        console.log('movie', selectTypes.value);
+      } else if (selectTypes.value == null || selectTypes.value == "" || selectTypes.value == "null") {
+        store.apiUrl = 'https://api.themoviedb.org/3/search/multi';
+        console.log('null', selectTypes.value);
+      }
+      let customParams = {
+        params: {
+          api_key: store.apiKey,
+          language: store.languageShows, 
+          query: store.titleShows,
+          page: store.pageShows,
+
+        }
+      }
+      axios.get(store.apiUrl, customParams)
+      .then(result => {
+        store.popularFilmsArray = result.data.results;
+        console.log('getApiSection store.popularFilmsArray', store.popularFilmsArray);
+        console.log('getApiSection store.apiUrl', store.apiUrl);
+
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    },
+
 
 
 
@@ -157,7 +261,7 @@ export default {
 </script>
 
 <template>
-  <Header @searchShows="getApiSearch" @changeLanguage="checkInput" />
+  <Header @searchShows="getApiSearch" @changeLanguage="checkInput" @changeType="checkInputType" />
   <Main/>
   <Footer/>
 </template>

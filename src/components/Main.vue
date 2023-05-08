@@ -17,7 +17,9 @@ export default {
     <!-- * container grande card -->
     <div class="container w-75 p-3 my-3 d-flex flex-column align-items-center justify-content-center">
       <!-- * container piccolo card -->
-      <div class="container d-flex flex-wrap p-0">
+      <!-- prima delle sections -->
+      <!-- <div class="container d-flex flex-wrap p-0"> -->
+
 
         <!-- * cards -->
         <!-- <div class="mp-card">
@@ -34,21 +36,39 @@ export default {
             <h5 class="card-title text-center p-3">{{card.name}}</h5>
           </div>
         </div> -->
+        <h1 class="align-self-start py-3 px-2">Film</h1>
+        <section class="container d-flex flex-wrap p-0">
+          <!-- cards dinamiche-->
+          <div v-for="(card, index) in store.popularFilmsArray" :key="index" class="mp-card">
+            <div>
+            <img v-if="card.poster_path || card.backdrop_path != null" class="card-img-top" :src="`https://image.tmdb.org/t/p/w500${card.poster_path || card.backdrop_path}`" alt="img">
+            <img v-else class="card-img-top" src="public\img\logo-boolflix.png" alt="img">
+            </div>
 
-        <!-- cards dinamiche-->
-        <div v-for="(card, index) in store.popularFilmsArray" :key="index" class="mp-card">
-          <div>
-          <img v-if="card.poster_path || card.backdrop_path != null" class="card-img-top" :src="`https://image.tmdb.org/t/p/w500${card.poster_path || card.backdrop_path}`" alt="img">
-          <img v-else class="card-img-top" src="public\img\logo-boolflix.png" alt="img">
+            <div class="card-body">
+              <h5 class="card-title d-flex align-items-center justify-content-center text-center p-3">{{card.title || card.name}}</h5>
+            </div>
           </div>
+        </section>
 
-          <div class="card-body">
-            <h5 class="card-title d-flex align-items-center justify-content-center text-center p-3">{{card.title || card.name}}</h5>
+        <h1 class="align-self-start py-3 px-2">TV Series</h1>
+        <section class="container d-flex flex-wrap p-0">
+          <!-- cards dinamiche-->
+          <div v-for="(card, index) in store.popularFilmsArray" :key="index" class="mp-card">
+            <div>
+            <img v-if="card.poster_path || card.backdrop_path != null" class="card-img-top" :src="`https://image.tmdb.org/t/p/w500${card.poster_path || card.backdrop_path}`" alt="img">
+            <img v-else class="card-img-top" src="public\img\logo-boolflix.png" alt="img">
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title d-flex align-items-center justify-content-center text-center p-3">{{card.title || card.name}}</h5>
+            </div>
           </div>
-        </div>
+        </section>
 
 
-      </div>
+      <!-- prima delle sections -->
+      <!-- </div> -->
 
     </div>
 
@@ -68,7 +88,7 @@ main{
   color: white;
   
   .container {
-    background-color: white;
+    // background-color: white;
   }
 
   .mp-card{
