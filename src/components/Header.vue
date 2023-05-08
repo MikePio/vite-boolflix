@@ -6,6 +6,9 @@ export default {
     return{
       store
     }
+  },
+  methods:{
+
   }
 
 }
@@ -24,8 +27,9 @@ export default {
         <!-- <select @change="$emit('changeType')" v-model="store.apiUrl" id="select-types-id" class="select-types form-select form-select-sm mx-1" aria-label=".form-select-sm example"> -->
         <!--//! NON UTILIZZARE IL v-model perchè in questo modo il VALORE delle options NON VIENE SALVATO -->
         <select @change="$emit('changeType')" id="select-types-id" class="select-types form-select form-select-sm mx-1" aria-label=".form-select-sm example">
+          <option value="" selected>All</option>
           <!-- <option value="null" selected>All</option> -->
-          <option value="null">All</option>
+          <!-- <option value="null">All</option> -->
           <!-- <option value="movie" selected>Film</option> -->
           <!-- <option value="tv" selected>Serie TV</option> -->
           <option value="movie">Film</option>
@@ -36,11 +40,9 @@ export default {
 
 <!-- creata una funzione che al change della select con 2 condizioni if (value == "") se la input bar è vuota changeLanguage cioè getApiSTart e else searchShows cioè getApiSearch -->
         <!-- select di ricerca in base a film e serie tv -->
-        <!--//todo NON UTILIZZARE IL v-model perchè in questo modo il VALORE delle options NON VIENE SALVATO -->
         <select @change="$emit('changeLanguage')" v-model="store.languageShows" class="select-languages form-select form-select-sm mx-3" aria-label=".form-select-sm example">
-        <!--//todo QUINDI FAI IN MODO CHE QUESTO FUNZIONI -->
-        <!-- <select @change="$emit('changeLanguage')" class="select-languages form-select form-select-sm mx-3" aria-label=".form-select-sm example"> -->
-          <option value="null" selected>English <span>&#x1F1FA;&#x1F1F8; 🇬🇧 </span></option>
+          <!--//*  il value della prima option deve essere uguale a quello di default  -->
+          <option value="en-US" selected>English <span>&#x1F1FA;&#x1F1F8; 🇬🇧 </span></option>
           <option value="it" >Italiano 🇮🇹 </option>
           <option value="de" >Deutsch 🇩🇪 </option>
           <option value="es" >Español 🇪🇸 </option>

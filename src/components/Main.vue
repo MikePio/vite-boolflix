@@ -36,7 +36,9 @@ export default {
             <h5 class="card-title text-center p-3">{{card.name}}</h5>
           </div>
         </div> -->
-        <h1 class="align-self-start py-3 px-2">Film</h1>
+
+        <!-- // TODO decommenta dopo aver consegnato le milestone e dopo aver creato la funzione che permette di viualizzare i film nella propria section e la stessa cosa pre le serie tv-->
+        <!-- <h1 class="align-self-start py-3 px-2">Film</h1> -->
         <section class="container d-flex flex-wrap p-0">
           <!-- cards dinamiche-->
           <div v-for="(card, index) in store.popularFilmsArray" :key="index" class="mp-card">
@@ -46,15 +48,22 @@ export default {
             </div>
 
             <div class="card-body">
+              <!-- Titolo -->
               <h5 class="card-title d-flex align-items-center justify-content-center text-center p-3">{{card.title || card.name}}</h5>
+              <!-- Titolo Originale -->
+              <h5 class="card-description d-flex align-items-center justify-content-center text-center p-3">{{card.original_name || card.original_title}}</h5>
+              <!-- Lingua -->
+              <h5 class="card-description d-flex align-items-center justify-content-center text-center p-3">{{card.original_language}}</h5>
+              <!-- Voto -->
+              <h5 class="card-description d-flex align-items-center justify-content-center text-center p-3">{{card.vote_average}}</h5>
             </div>
           </div>
         </section>
 
-        <h1 class="align-self-start py-3 px-2">TV Series</h1>
-        <section class="container d-flex flex-wrap p-0">
+        <!-- <h1 class="align-self-start py-3 px-2">TV Series</h1>
+        <section class="container d-flex flex-wrap p-0"> -->
           <!-- cards dinamiche-->
-          <div v-for="(card, index) in store.popularFilmsArray" :key="index" class="mp-card">
+          <!-- <div v-for="(card, index) in store.popularFilmsArray" :key="index" class="mp-card">
             <div>
             <img v-if="card.poster_path || card.backdrop_path != null" class="card-img-top" :src="`https://image.tmdb.org/t/p/w500${card.poster_path || card.backdrop_path}`" alt="img">
             <img v-else class="card-img-top" src="public\img\logo-boolflix.png" alt="img">
@@ -64,7 +73,7 @@ export default {
               <h5 class="card-title d-flex align-items-center justify-content-center text-center p-3">{{card.title || card.name}}</h5>
             </div>
           </div>
-        </section>
+        </section> -->
 
 
       <!-- prima delle sections -->
@@ -93,9 +102,14 @@ main{
 
   .mp-card{
     width: calc(100% / 4 - 20px);
-    height: 400px;
     // border: 1px blue dashed;
     margin: 0 10px 40px 10px;
+    //*prima di consegnare la milestone
+    //todo decommenta dopo la consegna
+    // height: 400px;
+    //*dopo di consegnare la milestone
+    min-height: 400px;
+
     img{
       height: 300px;
     }
@@ -105,6 +119,10 @@ main{
       .card-title{
         color: white;
         height: 125px;
+      }
+      .card-description{
+        color: white;
+        font-size: small;
       }
     }
   }
