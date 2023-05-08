@@ -42,7 +42,7 @@ export default {
         <!-- select di ricerca in base a film e serie tv -->
         <select @change="$emit('changeLanguage')" v-model="store.languageShows" class="select-languages form-select form-select-sm mx-3" aria-label=".form-select-sm example">
           <!--//*  il value della prima option deve essere uguale a quello di default  -->
-          <option value="en-US" selected>English <span>&#x1F1FA;&#x1F1F8; 🇬🇧 </span></option>
+          <option value="en-US" selected>English 🇬🇧 </option>
           <option value="it" >Italiano 🇮🇹 </option>
           <option value="de" >Deutsch 🇩🇪 </option>
           <option value="es" >Español 🇪🇸 </option>
@@ -87,7 +87,8 @@ header{
 
   .form-select-sm{
     // width: 200px;
-    width: 100px;
+    // width: 100px;
+    width: 115px;
 
   }
 

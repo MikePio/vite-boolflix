@@ -43,7 +43,9 @@ export default {
           </div>
         </div> -->
 
+        <!-- //* SEZIONE Film -->
         <!-- // TODO decommenta dopo aver consegnato le milestone e dopo aver creato la funzione che permette di viualizzare i film nella propria section e la stessa cosa pre le serie tv-->
+        <!-- // TODO CREA UN div che racchiude h1 e section, sia per la sezione film sia per le serie tv, e dai un if simile a media_type": "movie" ed un else per le serie tv -->
         <!-- <h1 class="align-self-start py-3 px-2">Film</h1> -->
         <section class="container d-flex flex-wrap p-0">
           <!-- cards dinamiche-->
@@ -63,10 +65,16 @@ export default {
               <h5 v-else class="card-description d-flex align-items-center justify-content-center text-center p-3">{{card.original_language}}</h5>
               <!-- Voto -->
               <h5 class="card-description d-flex align-items-center justify-content-center text-center p-3">{{card.vote_average}}</h5>
+              <!-- //* Container stelle -->
+              <div class="star-class d-flex align-items-center justify-content-center text-center p-3">
+              <i v-for="star in Math.ceil(card.vote_average / 2)" :key="star" class="fa-solid fa-star" style="color: #ffdd00;"></i>
+              <i v-for="star in 5 - Math.ceil(card.vote_average / 2)" :key="star" class="fa-regular fa-star" style="color: #ffdd00;"></i>
+              </div>
             </div>
           </div>
         </section>
 
+        <!-- //* SEZIONE TV Series -->
         <!-- <h1 class="align-self-start py-3 px-2">TV Series</h1>
         <section class="container d-flex flex-wrap p-0"> -->
           <!-- cards dinamiche-->
