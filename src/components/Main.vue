@@ -5,7 +5,13 @@ export default {
   data(){
     return{
       store,
+      flagsArray: [ 'de', 'en', 'es', 'fr', 'it' ],
     }
+  },
+  methods:{
+
+  },
+  mounted(){
   }
 
 }
@@ -47,13 +53,14 @@ export default {
             <img v-else class="card-img-top" src="public\img\logo-boolflix.png" alt="img">
             </div>
 
-            <div class="card-body">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center">
               <!-- Titolo -->
               <h5 class="card-title d-flex align-items-center justify-content-center text-center p-3">{{card.title || card.name}}</h5>
               <!-- Titolo Originale -->
               <h5 class="card-description d-flex align-items-center justify-content-center text-center p-3">{{card.original_name || card.original_title}}</h5>
               <!-- Lingua -->
-              <h5 class="card-description d-flex align-items-center justify-content-center text-center p-3">{{card.original_language}}</h5>
+              <img v-if="this.flagsArray.includes(card.original_language)" class="card-description d-flex align-items-center justify-content-center text-center p-3" :src="`public/img/${card.original_language}.png`" alt="lang img">
+              <h5 v-else class="card-description d-flex align-items-center justify-content-center text-center p-3">{{card.original_language}}</h5>
               <!-- Voto -->
               <h5 class="card-description d-flex align-items-center justify-content-center text-center p-3">{{card.vote_average}}</h5>
             </div>
@@ -124,6 +131,16 @@ main{
         color: white;
         font-size: small;
       }
+      img{
+        height: 60px;
+      }
+      div{
+
+        img{
+          height: 60px;
+        }
+
+      } 
     }
   }
 
