@@ -6,12 +6,15 @@ export default {
     return{
       store,
       flagsArray: [ 'de', 'en', 'es', 'fr', 'it' ],
+      showItem: true,
     }
   },
   methods:{
 
   },
   mounted(){
+    // this.showItem = true
+    // console.log(this.showItem);
   }
 
 }
@@ -50,12 +53,18 @@ export default {
         <section class="container d-flex flex-wrap p-0">
           <!-- cards dinamiche-->
           <div v-for="(card, index) in store.popularFilmsArray" :key="index" class="mp-card">
-            <div>
+            <!-- <div :class="{ 'd-block': card.showItem == true, 'd-none': card.showItem == false }" @mouseover="card.showItem = false" @mouseout="card.showItem = true"> -->
+            <!-- <div :class="{ 'd-block': card.showItem, 'd-none': !card.showItem }" @mouseover="card.showItem = false"> -->
+            <div :class="{ 'd-block': card.showItem == true, 'd-none': card.showItem == false }" @mouseover="card.showItem = false">
             <img v-if="card.poster_path || card.backdrop_path != null" class="card-img-top" :src="`https://image.tmdb.org/t/p/w500${card.poster_path || card.backdrop_path}`" alt="img">
             <img v-else class="card-img-top" src="public\img\logo-boolflix.png" alt="img">
             </div>
-
-            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+            <!-- //TODO con mouseover e mouseleave per far funzionare l'hover e far comparire il codice in basso e scomparire il codice in alto -->
+            <!-- <div :class="{ 'd-block': !card.showItem, 'd-none': card.showItem }" @mouseleave="card.showItem = true" -->
+            <!-- <div :class="{ 'd-block': card.showItem == false, 'd-none': card.showItem == true }" @mouseleave="card.showItem = true" @mouseout="card.showItem = false" -->
+            <!-- <div :class="{ 'd-flex': card.showItem == false, 'd-none': card.showItem == true }" @mouseleave="card.showItem = true" -->
+            <div v-if="card.showItem == false" @mouseleave="card.showItem = true"
+            class=" card-body d-flex flex-column align-items-center justify-content-center" >
               <!-- Titolo -->
               <h5 class="card-title d-flex align-items-center justify-content-center text-center p-3">{{card.title || card.name}}</h5>
               <!-- Titolo Originale -->
@@ -66,13 +75,18 @@ export default {
               <!-- Voto -->
               <h5 class="card-description d-flex align-items-center justify-content-center text-center p-3">{{card.vote_average}}</h5>
               <!-- //* Container stelle -->
-              <div class="star-class d-flex align-items-center justify-content-center text-center p-3">
+              <div class="star-class card-description d-flex align-items-center justify-content-center text-center p-3">
               <i v-for="star in Math.ceil(card.vote_average / 2)" :key="star" class="fa-solid fa-star" style="color: #ffdd00;"></i>
               <i v-for="star in 5 - Math.ceil(card.vote_average / 2)" :key="star" class="fa-regular fa-star" style="color: #ffdd00;"></i>
               </div>
             </div>
           </div>
         </section>
+
+        <!-- //! test -->
+
+        <!-- //! test -->
+
 
         <!-- //* SEZIONE TV Series -->
         <!-- <h1 class="align-self-start py-3 px-2">TV Series</h1>
@@ -138,6 +152,9 @@ main{
       .card-description{
         color: white;
         font-size: small;
+      }
+      h5.card-description{
+        height: 53px;
       }
       img{
         height: 60px;
