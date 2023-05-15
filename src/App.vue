@@ -34,6 +34,9 @@ export default {
         store.apiUrlStart = 'https://api.themoviedb.org/3/trending/all/day';
         console.log('null', selectTypes.value);
       }
+      
+      // numero che rappresenta la pagina corrente
+      console.log('store.pageShows', store.pageShows);
 
       let customParams = {
         params: {
@@ -41,7 +44,7 @@ export default {
           language: store.languageShows, 
           // query: store.titleShows,
           // title: store.titleShows,
-          // page: store.pageShows
+          page: store.pageShows
         }
       }
 
@@ -263,7 +266,7 @@ export default {
 <template>
   <Header @searchShows="getApiSearch" @changeLanguage="checkInput" @changeType="checkInputType" />
   <Main/>
-  <Footer/>
+  <Footer @changePage="getApiStart"/>
 </template>
 
 <style lang='scss'>

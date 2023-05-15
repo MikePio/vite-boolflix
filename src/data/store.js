@@ -50,7 +50,8 @@ export const store = reactive({
   languageShows: 'en-US',
   // languageShows: 'it',
   titleShows:'',
-  pageShows:'1',
+  // pageShows:'1',
+  pageShows: 1 ,
   typeShows: '',
   
   //! SE NON FUNZIONA CREA UNA STRINGA CON BACKTICK
